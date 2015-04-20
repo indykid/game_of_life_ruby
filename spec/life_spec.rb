@@ -1,27 +1,17 @@
 class Life
-	def initialize(cells)
-		@cells = cells
+	def initialize(generation)
 	end
-	def generation
-		[]
+	
+	def to_be_or_not_to_be(cell)
+		false
 	end
 end
 
 describe Life do
-	it 'given one life cell returns zero life cells' do
-		life = Life.new([[0, 0]])
-		expect(life.generation).to eq([])
-	end
-	it "given two non-adjacent cells returns zero life cells" do
-		life = Life.new([[0, 0], [0, 5]])
-		expect(life.generation).to eq([])
-	end
-	
-	it "given two adjacent cells returns zero life cells" do
-		life = Life.new([[0, 0], [0, 1]])
-		expect(life.generation).to eq([])
-	end
-
-	it "given a cell with two adjacent cells returns that cell" do
+	describe "to_be_or_not_to_be" do	
+		it 'given lonely life cell returns false' do
+			life = Life.new([0, 0])
+			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
+		end
 	end
 end
