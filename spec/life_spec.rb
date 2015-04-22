@@ -36,23 +36,23 @@ end
 
 describe Life do
 	describe "to_be_or_not_to_be" do	
-		xit 'given lonely life cell returns false' do
+		it 'given lonely life cell returns false' do
 			life = Life.new([0, 0])
 			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
 		end
 		
-		xit 'given a life cell with one neighbour returns false' do
+		it 'given a life cell with one neighbour returns false' do
 			life = Life.new([[0, 0], [0, 1]])
 			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
 		end
 
-		xit 'given a life cell with two neighbours returns true' do
+		it 'given a life cell with two neighbours returns true' do
 			life = Life.new([[0, 0], [0, 1], [1, 0]])
 			expect(life.to_be_or_not_to_be([0, 0])).to be(true)
 		end
 		
-		xit 'given a life cell with two neighbours returns false' do
-			life = Life.new([[0, 0], [0, 1], [1, 0]])
+		it 'given a live cell with one neighbour and one non-neighbour returns false' do
+			life = Life.new([[0, 0], [0, 1], [1, 5]])
 			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
 		end
 	end
