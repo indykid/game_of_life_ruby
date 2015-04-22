@@ -6,7 +6,7 @@ class Life
 	
 	def evolve
 		@generation = @generation.select {|cell| survivor?(cell)}
-									.concat(candidates.select {|cell| to_be_born(cell) })
+									.concat(candidates.select {|cell| to_be_born?(cell) })
 	end
 
 	def survivor?(cell) 
@@ -14,16 +14,12 @@ class Life
 		count > 1 && count < 4
 	end
 	
-	def to_be_born(cell)
+	def to_be_born?(cell)
 		neighbours_count(cell) == 3
 	end
 
 	def neighbours_count(cell)
-		count = 0
-		surrounding_cells(cell).each do |cell|
-			count+= 1 if @generation.include? cell
-		end	
-		count
+		surrounding_cells(cell).select { |cell| @generation.include?(cell) }.length
 	end
 
 	def candidates 
@@ -103,31 +99,30 @@ describe Life do
 		end
 	end
 
-	describe '#to_be_born' do
+	describe '#to_be_born?' do
 		it 'given a dead cell with no neighbours returns false' do
 			life = Life.new([[10, 10]])
-			expect(life.to_be_born([8, 8])).to be(false)
+			expect(life.to_be_born?([8, 8])).to be(false)
 		end
-		
 
 		it 'given a dead cell with one neighbour returns false' do
 			life = Life.new([[10, 10]])
-			expect(life.to_be_born([10, 9])).to be(false)
+			expect(life.to_be_born?([10, 9])).to be(false)
 		end
 		
 		it 'given a dead cell with two neighbours returns false' do
 			life = Life.new([[10, 10], [9, 10]])
-			expect(life.to_be_born([10, 9])).to be(false)
+			expect(life.to_be_born?([10, 9])).to be(false)
 		end
 		
 		it 'given a dead cell with three neighbours returns true' do
 			life = Life.new([[10, 10], [9, 10], [9, 9]])
-			expect(life.to_be_born([10, 9])).to be(true)
+			expect(life.to_be_born?([10, 9])).to be(true)
 		end
 
 		it 'given a dead cell with four neighbours returns false' do
 			life = Life.new([[10, 10], [9, 10], [9, 9], [11, 9]])
-			expect(life.to_be_born([10, 9])).to be(false)
+			expect(life.to_be_born?([10, 9])).to be(false)
 		end
 	end
 
