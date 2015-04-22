@@ -10,8 +10,7 @@ class Life
 	end
 
 	def survivor?(cell) 
-		count = neighbours_count(cell) 
-		count > 1 && count < 4
+		(2..3).include?(neighbours_count(cell))
 	end
 	
 	def to_be_born?(cell)
