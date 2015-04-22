@@ -4,7 +4,8 @@ class Life
 	end
 	
 	def to_be_or_not_to_be(cell) 
-		neighbours_count(cell) >= 2
+		count = neighbours_count(cell) 
+		count > 1 && count < 4
 	end
 	
 	def neighbours_count(cell)
@@ -55,6 +56,11 @@ describe Life do
 			life = Life.new([[0, 0], [0, 1], [1, 5]])
 			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
 		end
+		
+		it 'given a live cell with four neighbours returns false' do
+			life = Life.new([[0, 0], [0, 1], [1, 0], [1, 1], [0, -1]])
+			expect(life.to_be_or_not_to_be([0, 0])).to be(false)
+		end	
 	end
 
 	describe "neighbours_count" do
