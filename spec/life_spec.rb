@@ -34,17 +34,31 @@ class Life
 	end
 
 	def surrounding_cells(cell)
-		row = cell[0]
-		column = cell[1]
-		surrounding_cells = []
-		rows = neighbourhood_lines(row)
-		columns = neighbourhood_lines(column)
+		rows = neighbourhood_lines(row_for(cell))
+		columns = neighbourhood_lines(column_for(cell))
+		generate_grid(rows, columns).reject { |neighbour_cell| neighbour_cell == cell }
+	end
+
+	def generate_grid(rows, columns)
+		grid = []
 		rows.each do |r|
 			columns.each do |c|
-				surrounding_cells << [r, c] unless r == row && c == column
+				grid << create_cell(r, c)
 			end
 		end
-		surrounding_cells
+		grid
+	end
+
+	def create_cell(row, column)
+		[row, column]
+	end
+
+	def row_for(cell)
+		cell.first
+	end
+
+	def column_for(cell)
+		cell.last
 	end
 end
 
