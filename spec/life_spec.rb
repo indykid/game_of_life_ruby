@@ -1,17 +1,17 @@
 require 'life'
 describe Life do
 	describe "survivor?" do	
-		it 'given lonely life cell returns false' do
+		it 'given lonely live cell returns false' do
 			life = Life.new([0, 0])
 			expect(life.survivor?([0, 0])).to be(false)
 		end
 		
-		it 'given a life cell with one neighbour returns false' do
+		it 'given a live cell with one neighbour returns false' do
 			life = Life.new([[0, 0], [0, 1]])
 			expect(life.survivor?([0, 0])).to be(false)
 		end
 
-		it 'given a life cell with two neighbours returns true' do
+		it 'given a live cell with two neighbours returns true' do
 			life = Life.new([[0, 0], [0, 1], [1, 0]])
 			expect(life.survivor?([0, 0])).to be(true)
 		end
@@ -101,7 +101,7 @@ describe Life do
 			expect(life.generation).to match_array([[10, 9], [10, 10], [9, 9], [9, 10]])
 		end
 		
-		it 'alternates direction of 3 cells in a row' do
+		it 'alternates direction of 3 cells in a row, blinker pattern' do
 			life = Life.new([[10, 9], [10, 10], [10, 11]])
 			life.evolve
 			expect(life.generation).to match_array([[9, 10], [10, 10], [11, 10]])
